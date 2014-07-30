@@ -35,19 +35,16 @@ public class ZipUtil {
 			parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
 			parameters.setFileNameInZip(filename);
 			parameters.setSourceExternalStream(true);
-			String fileString = getListAsString(list1);
-			InputStream inputStream =  IOUtils.toInputStream(fileString, "UTF-8");
+			InputStream inputStream =  IOUtils.toInputStream(getListAsString(list1).toString(), "UTF-8");
 			zipFile.addStream(inputStream , parameters);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 		}
-		
 	}
 
-	private static String getListAsString(List<Asset> list1) {
-		StringBuffer sb = new StringBuffer();
+	private static StringBuilder getListAsString(List<Asset> list1) {
+		StringBuilder sb = new StringBuilder();
 		for (Asset asset : list1) {
 			sb.append(asset.getAssetId());
 			sb.append(",");
@@ -56,7 +53,7 @@ public class ZipUtil {
 			sb.append(asset.getAssetPrice());
 			sb.append("\n");
 		}
-		return sb.toString();
+		return sb;
 	}
 	
 	
